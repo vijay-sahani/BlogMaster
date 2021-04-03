@@ -38,8 +38,16 @@ def writeBlog(request):
     form = AddBlogForm()
     return render(request, 'AddBlog.html', {'form' : form})
 
+def showArticles(request):
+    allPosts=BlogPost.objects.all()
+    return render(request,'articles.html',{'blogs':allPosts})
 
 def myPost(request):
+    if request.method=='GET':
+        query=request.GET['query']
+        results=BlogPost.objects.filter(title_icontains=query)
+        if results.count()==0:
+            return None
     allpost=BlogPost.objects.filter(user=request.user)
     return render(request,'myPost.html',{'posts':allpost})
 
