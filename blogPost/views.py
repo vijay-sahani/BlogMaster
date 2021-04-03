@@ -63,8 +63,7 @@ def deletePost(request,id):
     
 def docs(request):
     messages.warning(request,'<strong>Under Progress!</strong> Currently I am working on the Docmentation, So right now you might not find this helpful')
-    # return render(request,'docs.html')
-    return redirect('index')
+    return render(request,'docs.html')
 
 def contact_us(request):
     if request.method=='POST':

@@ -11,3 +11,4 @@ $('#toggleBtn').on('click',function(){
         toggleBtn.innerHTML='<a>ReadLess</a>'
     }
 });
+

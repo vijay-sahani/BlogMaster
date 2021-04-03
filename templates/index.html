@@ -111,10 +111,10 @@
 
 <script>
     {% if user.is_authenticated %}
-    document.getElementById("#fname1").value='{{ user.first_name}}';
-    document.getElementById("#lname1").value='{{ user.last_name}}';
-    document.getElementById("#email1").value='{{ user.email}}';
-    {% endif %}
+    document.getElementById("fname1").value='{{ user.first_name}}';
+    document.getElementById("lname1").value='{{ user.last_name}}';
+    document.getElementById("email1").value='{{ user.email}}';
+{% endif %}
 </script>
 
 {% endblock extrajs%}
