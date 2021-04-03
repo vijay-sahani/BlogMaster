@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Write a blog{% endblock %}
+
+
+{% block write%} active {%endblock write%}
+{% block css %}
+<style>
+    span {
+        color: red;
+    }
+
+    #note {
+        display: flex;
+        justify-content: center;
+    }
+    #warning{
+        margin-bottom:3px;
+    }
+</style>
+
+{% endblock css %}
+
+{% block body %}
+{% load static %}
+<div class="container my-4" id='note'>
+    <div class="alert alert-warning d-inline-block" role="alert">
+        <img id='warning' src={% static 'images/warning.svg'%} alt=""> <strong>Note:</strong> Please signup before writing a blog. <em>Ignore</em> if you already did.
+    </div>
+</div>
+<div class="container my-4">
+    <form class="row g-3 needs-validation" enctype="multipart/form-data" method="POST">{% csrf_token %}
+    {{form.media}}
+        {{ form.as_p }}
+        <div class="col-12">
+            <button class="btn btn-primary" id="submit" type="submit">Post</button>
+        </div>
+    </form>
+</div>
+
+{% endblock body %}
+{% block extrajs %}
+
+
+<script>
+    {% if user.is_authenticated %}
+  
+    $('#id_user').val('{{user.id}}');
+    {% else %}
+    $('#signupbtn').click();
+    {%endif %} 
+</script>
+{% endblock extrajs %}

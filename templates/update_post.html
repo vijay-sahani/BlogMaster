@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}Update Post{% endblock title %}
+{% block yourPost %}active{% endblock yourPost  %}
+ {% block css %}
+ <style>
+ #cke_description {
+    width: auto !important;
+}
+</style>
+ {% endblock css %}
+{% block body %}
+{% if user.is_authenticated %}
+
+
+    {% if form.instance.user == request.user %}
+
+<div class="container my-4">
+    <form class="row g-3 needs-validation" enctype="multipart/form-data" method="POST">{% csrf_token %}
+    {{form.media}}
+        {{ form.as_p }}
+        <div class="col-12">
+            <button class="btn btn-primary" id="submit" type="submit">Update</button>
+        </div>
+    </form>
+</div>
+{% else %}
+<div class="container my-4">
+     <div class="d-flex h-100 text-center text-white bg-dark">
+        <main class="px-3">
+            <h1>You are not allowed here!...</h1>
+            <p class="lead">
+            You can't edit other's post right now! But in future I might consider adding this feature for now you can just edit your post only. Don't have any post to edit then what are you waiting for click the button below and your own post..
+            <p>
+            <p class="lead">
+                <a href="{% url 'addBlog' %}" class="btn btn-lg btn-light fw-bold border-white bg-white">Add Post</a>
+            </p>
+        </main>
+</div>
+</div>
+
+    {% endif %}
+    {% else %}
+<div class="container my-4">
+     <div class="d-flex h-100 text-center text-white bg-dark">
+        <main class="px-3">
+            <h1>You are not allowed here!...</h1>
+            <p class="lead">
+            You can't edit other's post right now! But in future I might consider adding this feature for now you can just edit your post only. Don't have any post to edit then what are you waiting for click the button below and your own post..
+            <p>
+            <p class="lead">
+                <a href="{% url 'addBlog' %}" class="btn btn-lg btn-light fw-bold border-white bg-white">Add Post</a>
+            </p>
+        </main>
+</div>
+</div>
+{% endif %}
+
+{% endblock body %}
+
+{% block extrajs %}
+<script>
+    $('#submit').click(()=>{
+        let title=document.getElementById('id_title');
+        if (! title.value.includes('(edited)')){
+            title.value+= ' (edited)';
+        }
+    })
+
+</script>
+{% endblock extrajs %}
