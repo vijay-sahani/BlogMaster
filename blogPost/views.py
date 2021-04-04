@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render,HttpResponse
 from django.views.generic import UpdateView
 from .forms import AddBlogForm, EditPostForm
 from .models import BlogPost,Contact
+from django.utils.text import slugify
 
 
 
@@ -27,7 +28,7 @@ def writeBlog(request):
                 form=AddBlogForm(request.POST,request.FILES)
                 if form.is_valid():
                     form.save()
-                    messages.success(request,f'<strong>Blog Uploaded Successfully</strong> view your blog <a href="article/{form.instance.id}/{form.instance}">here</a>')
+                    messages.success(request,f'<strong>Blog Uploaded Successfully</strong> view your blog <a href="article/{form.instance.id}/{slugify(form.instance)}">here</a>')
                 else:
                     print(form.errors)
             else:

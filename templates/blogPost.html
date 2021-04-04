@@ -58,7 +58,7 @@
                 <h4 class="fst-italic">Explore More Blogs</h4>
                 <ol class="list-unstyled">
                 {% for title,id in other_urls  %}
-                    <li><a href="{% url 'detailView' id title %}">{{title}}</a></li>
+                    <li><a href="{% url 'detailView' id title|slugify %}">{{title}}</a></li>
                 {% endfor %}
                 </ol>
             </div>
