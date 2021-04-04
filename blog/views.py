@@ -7,7 +7,7 @@ from django.urls import reverse
 def check_auth(request):
     if request.user.is_authenticated :
         if request.user.is_staff and request.user.is_superuser:
-            return redirect('/admin-panel/')
+            return redirect('admin:index')
     return render(request,'404.html')
 
 
