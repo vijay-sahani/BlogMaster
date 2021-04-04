@@ -2,6 +2,14 @@ from django.shortcuts import redirect, render,HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
+from django.urls import reverse
+
+def check_auth(request):
+    if request.user.is_authenticated :
+        if request.user.is_staff and request.user.is_superuser:
+            return redirect('/admin-panel/')
+    return render(request,'404.html')
+
 
 
 def handleSignup(request):

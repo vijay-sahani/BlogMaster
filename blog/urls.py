@@ -22,9 +22,9 @@ from . import views
 
 
 
-
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', views.check_auth, name='checkUser'),
+    path('admin-panel/', admin.site.urls, name = 'admin'),
     path('', include('blogPost.urls')),
     path('signup', views.handleSignup, name='signup'),
     path('login', views.handleLogin),
